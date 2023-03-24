@@ -6,30 +6,6 @@
     <title>Image Upload Example</title>
     <link rel="stylesheet" href="leafy.css">
     <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
-    <script>
-      const socket = io('http://localhost:8000');
-  
-      socket.on('connect', () => {
-        console.log('Connected to server:', socket.id);
-        document.getElementById('server-status').style.color = 'green';
-        document.getElementById('server-status').textContent = 'Connected';
-      });
-  
-      socket.on('disconnect', () => {
-        console.log('Disconnected from server');
-        document.getElementById('server-status').style.color = 'red';
-        document.getElementById('server-status').textContent = 'Disconnected';
-      });
-  
-      socket.on('pong', () => {
-        console.log('Received pong from server');
-      });
-  
-      function sendPing() {
-        console.log('Sending ping to server');
-        socket.emit('ping');
-      }
-    </script>
 </head>
 <body>
     <h1>
@@ -37,7 +13,7 @@
     </h1>
     <div>
         Server Status: <span id="server-status" style="color: red;">Disconnected</span>
-      </div>
+    </div>
     <input type="file" id="image-upload" accept="image/*" multiple>
     <script src="main.js"></script>
 </body>

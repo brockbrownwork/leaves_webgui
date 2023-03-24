@@ -1,4 +1,6 @@
 import socketio, eventlet, time, webbrowser
+from get_image_from_base64 import save_base64_image
+import os
 
 # make sure there's only one instance of this server running
 # if there's already a server running, then open the client in a new tab
@@ -25,6 +27,13 @@ def ping(sid):
 def message(sid, data):
     print('Received message:', data)
     sio.emit('message', "echo: " + data)
+
+@sio.event
+def upload_image(sid, data):
+    # takes in a base64 encoded image, and writes the image to output/test_{number of files in folder + 1}.png
+    sio.emit('message', "image has been received", room = sid)
+    save_base64_image(data, 'output/test_{}.png'.format(len(os.listdir('output')) + 1))
+    sio.emit('message', "...image has been saved!", room = sid)
 
 if __name__ == '__main__':
     webbrowser.open('main.html')
