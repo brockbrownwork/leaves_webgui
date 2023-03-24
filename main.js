@@ -36,7 +36,6 @@ document.getElementById('image-upload').addEventListener('change', (event) => {
             reader.onload = (e) => {
                 const base64Image = e.target.result;
                 console.log('Base64 Image:', base64Image);
-                copyToClipboard(base64Image);
                 // send base64Image to server
                 socket.emit('upload_image', base64Image);
                 const img = document.createElement('img');
