@@ -33,7 +33,11 @@ def upload_image(sid, data):
     # takes in a base64 encoded image, and writes the image to output/test_{number of files in folder + 1}.png
     sio.emit('message', "image has been received", room = sid)
     save_base64_image(data, 'output/test_{}.png'.format(len(os.listdir('output')) + 1))
-    sio.emit('message', "...image has been saved!", room = sid)
+    sio.emit('message', "...image has been saved! Processing image...", room = sid)
+
+def process_image(sid, base64image):
+    # takes in a base64image then returns it back to the front end client
+    sio.emit('image_processed', base64image, room = sid)
 
 if __name__ == '__main__':
     webbrowser.open('main.html')
