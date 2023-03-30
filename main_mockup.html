@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Upload Example</title>
+    <link rel="stylesheet" href="leafy.css">
+    <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
+</head>
+<body>
+    <h1>
+        leaves.py
+    </h1>
+    <div>
+        Server Status: <span id="server-status" style="color: red;">Disconnected</span>
+    </div>
+    <h3>Step 1: Upload the files</h3>
+    <p>You can either upload the files here, or put your images directly into the input folder.</p>
+    <input type="file" id="image-upload" accept="image/*" multiple>
+    <div id = "uploaded-images" class = "image-grid">
+        <img src = "images/output.png" alt = "output" id = "upload-image-0"/>
+        <img src = "images/output.png" alt = "output" id = "upload-image-1"/>
+        <img src = "images/output.png" alt = "output" id = "upload-image-2" />
+    </div>
+    <hr/>
+    <div id = "report">
+        <h3> Batch 1 </h3>
+        <div id = "batch-1" class = 'leaf-grid'>
+            <div id = "batch-1-leaf-1">
+                <img src = "images/leaf_1.png" alt = "leaf_1" id = "batch-1-leaf-1-image"/>
+                <span id = "batch-1-leaf-1-damage" style = "color: red">Damage: 0.5</span>
+            </div>
+            <div id = "batch-1-leaf-2">
+                <img src = "images/leaf_2.png" alt = "leaf_2" id = "batch-1-leaf-2-image"/>
+                <span id = "batch-1-leaf-2-damage" style = "color: red">Damage: 0.5</span>
+            </div>
+            <div id = "batch-1-leaf-3">
+                <img src = "images/leaf_3.png" alt = "leaf_3" id = "batch-1-leaf-3-image"/>
+                <span id = "batch-1-leaf-3-damage" style = "color: red">Damage: 0.5</span>
+            </div>
+            <div id = "batch-1-leaf-4">
+                <img src = "images/leaf_4.png" alt = "leaf_4" id = "batch-1-leaf-4-image"/>
+                <span id = "batch-1-leaf-4-damage" style = "color: red">Damage: 0.5</span>
+            </div>
+        </div>
+    </div>
+    <button >Send Images</button>
+    <div id = "report"></div>
+    <script src="main.js"></script>
+</body>
+</html>

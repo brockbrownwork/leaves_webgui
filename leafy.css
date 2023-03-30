@@ -7,6 +7,30 @@ body {
     align-items: center;
   }
 
+  .image-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    max-width: 75%;
+    margin: 10px auto 0; /* adds 10px top padding */
+  }
+  
+  .image-grid img {
+    width: 100%;
+  }
+  
+  .leaf-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 10px;
+    max-width: 75%;
+    margin: 10px auto 0; /* adds 10px top padding */
+  }
+  
+  .leaf-grid img {
+    width: 100%;
+  }
+  
 #image-upload {
   display: block;
   margin: 0 auto;
@@ -14,13 +38,42 @@ body {
   text-align-last: center;
 }
 
+
+hr {
+  border: 0;
+  clear:both;
+  display:block;
+  width: 96%;               
+  background-color:#FFFF00;
+  height: 1px;
+}
+
+hr {
+  border: none;
+  height: 2px;
+  width: 75%;
+  background: linear-gradient(to right, #1a6304, #4CAF50);
+  opacity: 0.5;
+  margin: 1em auto;
+  border-radius: 4px;
+}
+
+
+
+
+
 h1, h2, h3 {
   color: #3B3A18; /* a dark green color for headings */
 }
 
+h1, h2, h3, h4, h5, h6 {
+  text-align: center;
+  margin: 0 auto;
+}
+
 p {
   color: #555555; /* a medium gray color for text */
-  line-height: 1.5; /* increase line spacing for readability */
+  line-height: 1; /* increase line spacing for readability */
 }
 
 /* style links with leafy colors */
@@ -35,7 +88,7 @@ a:hover {
 
 /* add a leafy border to images */
 img {
-  border: 4px solid #659D32;
+  border: 2px solid #659D32;
   border-radius: 10px;
 }
 
