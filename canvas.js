@@ -1,3 +1,4 @@
+      window.onload = function() {
       var canvas = document.getElementById("canvas");
       var ctx = canvas.getContext("2d");
 
@@ -62,6 +63,7 @@
           lastY = mouseY;
         }
       }
+
       $("#canvas").mousedown(function(e) { handleMouseDown(e); });
       $("#canvas").mousemove(function(e) { handleMouseMove(e); });
       $("#canvas").mouseup(function(e) { handleMouseUp(e); });
@@ -69,3 +71,4 @@
 
       $("#pen").click(function() { mode = "pen"; });
       $("#eraser").click(function() { mode = "eraser"; });
+      }

@@ -1,3 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Simple Canvas</title>
+    <style>
+      #canvas, #bgCanvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      .canvas-container {
+        position: relative;
+        width: 300px;
+        height: 200px;
+        border: 1px solid #000;
+      }
+      canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0;
+      }
+      #bgCanvas {
+        z-index: -1;
+      }
+      #pen, #eraser {
+        position: absolute;
+        top: 10px;
+        left: 320px;
+        z-index: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="pen">Pen</button>
+    <button id="eraser">Eraser</button>
+    <div class = 'canvas-container'>
+      <canvas id="bgCanvas" width="300" height="300"></canvas>
+      <canvas id="canvas" width="300" height="300"></canvas>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>
       var canvas = document.getElementById("canvas");
       var ctx = canvas.getContext("2d");
 
@@ -62,6 +112,7 @@
           lastY = mouseY;
         }
       }
+
       $("#canvas").mousedown(function(e) { handleMouseDown(e); });
       $("#canvas").mousemove(function(e) { handleMouseMove(e); });
       $("#canvas").mouseup(function(e) { handleMouseUp(e); });
@@ -69,3 +120,6 @@
 
       $("#pen").click(function() { mode = "pen"; });
       $("#eraser").click(function() { mode = "eraser"; });
+
+    </script>
+  </body>
