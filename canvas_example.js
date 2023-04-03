@@ -1,97 +1,72 @@
-const fileInput = document.querySelector("#upload");
+      var canvas = document.getElementById("canvas");
+      var ctx = canvas.getContext("2d");
 
-// enabling drawing on the blank canvas
-drawOnImage();
+      // Get background canvas and context
+      var bgCanvas = document.getElementById("bgCanvas");
+      var bgCtx = bgCanvas.getContext("2d");
 
-fileInput.addEventListener("change", async (e) => {
-  const [file] = fileInput.files;
+      // Load and draw background image
+      var backgroundImage = new Image();
+      backgroundImage.src = 'images/leaf_4.png';
+      backgroundImage.onload = function() {
+        bgCtx.drawImage(backgroundImage, 0, 0, bgCanvas.width, bgCanvas.height);
+      };
 
-  // displaying the uploaded image
-  const image = document.createElement("img");
-  image.src = await fileToDataUri(file);
+      var lastX;
+      var lastY;
+      var mouseX;
+      var mouseY;
+      var canvasOffset = $("#canvas").offset();
+      var offsetX = canvasOffset.left;
+      var offsetY = canvasOffset.top;
+      var isMouseDown = false;
+      var mode = "pen";
 
-  // enbaling the brush after after the image
-  // has been uploaded
-  image.addEventListener("load", () => {
-    drawOnImage(image);
-  });
+      function handleMouseDown(e){
+        mouseX = parseInt(e.clientX - offsetX);
+        mouseY = parseInt(e.clientY - offsetY);
+        lastX = mouseX;
+        lastY = mouseY;
+        isMouseDown = true;
+      }
 
-  return false;
-});
+      function handleMouseUp(e){
+        mouseX = parseInt(e.clientX - offsetX);
+        mouseY = parseInt(e.clientY - offsetY);
+        isMouseDown = false;
+      }
 
-function fileToDataUri(field) {
-  return new Promise((resolve) => {
-    const reader = new FileReader();
+      function handleMouseOut(e){
+        mouseX = parseInt(e.clientX - offsetX);
+        mouseY = parseInt(e.clientY - offsetY);
+        isMouseDown = false;
+      }
 
-    reader.addEventListener("load", () => {
-      resolve(reader.result);
-    });
+      function handleMouseMove(e){
+        mouseX = parseInt(e.clientX - offsetX);
+        mouseY = parseInt(e.clientY - offsetY);
 
-    reader.readAsDataURL(field);
-  });
-}
+        if (isMouseDown) {
+          ctx.beginPath();
+          if (mode == "pen") {
+            ctx.globalCompositeOperation = "source-over";
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(mouseX, mouseY);
+            ctx.stroke();
+          } else {
+            ctx.globalCompositeOperation = "destination-out";
+            ctx.arc(lastX, lastY, 8, 0, Math.PI * 2, false);
+            ctx.fill();
+          }
+          lastX = mouseX;
+          lastY = mouseY;
+        }
+      }
 
-const sizeElement = document.querySelector("#sizeRange");
-let size = sizeElement.value;
-sizeElement.oninput = (e) => {
-  size = e.target.value;
-};
+      $("#canvas").mousedown(function(e) { handleMouseDown(e); });
+      $("#canvas").mousemove(function(e) { handleMouseMove(e); });
+      $("#canvas").mouseup(function(e) { handleMouseUp(e); });
+      $("#canvas").mouseout(function(e) { handleMouseOut(e); });
 
-const colorElement = document.getElementsByName("colorRadio");
-let color;
-colorElement.forEach((c) => {
-  if (c.checked) color = c.value;
-});
-
-colorElement.forEach((c) => {
-  c.onclick = () => {
-    color = c.value;
-  };
-});
-
-function drawOnImage(image = null) {
-  const canvasElement = document.getElementById("canvas");
-  const context = canvasElement.getContext("2d");
-
-  // if an image is present,
-  // the image passed as a parameter is drawn in the canvas
-  if (image) {
-    const imageWidth = image.width;
-    const imageHeight = image.height;
-
-    // rescaling the canvas element
-    canvasElement.width = imageWidth;
-    canvasElement.height = imageHeight;
-
-    context.drawImage(image, 0, 0, imageWidth, imageHeight);
-  }
-
-  const clearElement = document.getElementById("clear");
-  clearElement.onclick = () => {
-    context.clearRect(0, 0, canvasElement.width, canvasElement.height);
-  };
-
-  let isDrawing;
-
-  canvasElement.onmousedown = (e) => {
-    isDrawing = true;
-    context.beginPath();
-    context.lineWidth = size;
-    context.strokeStyle = color;
-    context.lineJoin = "round";
-    context.lineCap = "round";
-    context.moveTo(e.clientX, e.clientY);
-  };
-
-  canvasElement.onmousemove = (e) => {
-    if (isDrawing) {
-      context.lineTo(e.clientX, e.clientY);
-      context.stroke();
-    }
-  };
-
-  canvasElement.onmouseup = function () {
-    isDrawing = false;
-    context.closePath();
-  };
-}
+      $("#pen").click(function() { mode = "pen"; });
+      $("#eraser").click(function() { mode = "eraser"; });
