@@ -12,10 +12,6 @@ socket.on('disconnect', () => {
   document.getElementById('server-status').textContent = 'Disconnected';
 });
 
-socket.on('pong', () => {
-  console.log('Received pong from server');
-});
-
 socket.on('message', (message) => {
     console.log('Server:', message);
 });

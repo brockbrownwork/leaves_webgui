@@ -19,11 +19,6 @@ def disconnect(sid):
     print('Client disconnected:', sid)
 
 @sio.event
-def ping(sid):
-    print('Received ping from:', sid)
-    sio.emit('pong', room=sid)
-
-@sio.event
 def message(sid, data):
     print('Received message:', data)
     sio.emit('message', "echo: " + data)
