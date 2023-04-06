@@ -8,7 +8,7 @@ socket.on('connect', () => {
 
 socket.on('disconnect', () => {
   console.log('Disconnected from server');
-  document.getElementById('server-status').style.color = 'red';
+  document.getElementById('server-status').style.color = 'grey';
   document.getElementById('server-status').textContent = 'Disconnected';
 });
 
@@ -27,6 +27,30 @@ socket.on('image_processed', (base64Image) => {
     img.style.maxWidth = '100%';
     displayImages([img], 'received-images');
 });
+
+function alert(message) {
+  if (message == "") {
+    document.getElementById('alert').textContent = "";
+    document.getElementById('alert').style.display = "none";
+    return;
+  }
+  // put an alert on the top of the window
+  console.log('Alert:', message);
+  // set the content of #alert to the message
+  document.getElementById('alert').textContent = message;
+  $("#alert").fadeIn(1000); // fade in over 1 second (1000 milliseconds)
+}
+
+function generateReport(){
+  console.log("Generating report");
+  // if the number of images in the uploaded-images div is 0, then don't generate a report
+  if (document.getElementById('uploaded-images').childElementCount == 0) {
+    alert("No images to generate report from. Please upload images first.");
+    return;
+  }
+  alert(''); // clear the alert
+  $('#loading').fadeIn(1000); // fade in over 1 second (1000 milliseconds)
+}
 
 function sendPing() {
   console.log('Sending ping to server');

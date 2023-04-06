@@ -3,19 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Upload Example</title>
+    <title>leaves.py</title>
     <link rel="stylesheet" href="leafy.css">
     <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <h1>
-        leaves.py
+        leaves.py <img id = 'leaf-icon' src = "images/leaf_icon.png" alt = "leaf_icon" id = "leaf-icon"/>
     </h1>
     <div>
-        Server Status: <span id="server-status" style="color: red;">Disconnected</span>
+        Server Status: <span id="server-status" style="color: grey;">Disconnected</span>
+    </div>
+    <div>
+        <p id = "alert"></p>
     </div>
     <input type="file" id="image-upload" accept="image/*" multiple>
-    <div id = "uploaded-images"></div>
+    <div>
+        <button id = "generate-report" onclick = "generateReport()">Generate report</button>
+    </div>
+    <div>
+        <img id="loading" src="images/loading.gif" style="display:none;">
+    </div>
+    <div id = "uploaded-images" class = "image-grid"></div>
     <div id = "received-images"></div>
     <script src="main.js"></script>
 </body>

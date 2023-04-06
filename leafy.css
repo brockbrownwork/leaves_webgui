@@ -38,6 +38,12 @@ body {
   text-align-last: center;
 }
 
+#generate-report {
+  /* add some padding */
+  margin: 10px 10px;
+}
+
+
 
 hr {
   border: 0;
@@ -104,4 +110,43 @@ button {
 button:hover {
   background-color: #659D32;
   cursor: pointer;
+}
+
+#loading {
+  /* get rid of the border and hide the image */
+  border: none;
+  margin: 10, 10, 30, 10;
+  display: none;
+}
+
+.uploaded_image {
+  /* add some padding */
+  margin: 10px 10px;
+}
+
+#alert {
+  /* Make it red and hide it*/
+  color: red;
+  display: none;
+}
+
+#leaf-icon {
+  /* get rid of the border */
+  border: none;
+  width: 30px;
+  height: 30px;
+  animation: bob 3s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes bob {
+  0% {
+      transform: translateX(-2px) rotate(-6deg);
+  }
+  50% {
+      transform: translateX(2px) rotate(6deg);
+  }
+  100% {
+      transform: translateX(-2px) rotate(-6deg);
+  }
 }
