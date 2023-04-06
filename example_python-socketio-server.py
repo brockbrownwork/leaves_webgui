@@ -30,7 +30,7 @@ def upload_image(sid, data):
     save_base64_image(data, 'output/test_{}.png'.format(len(os.listdir('output')) + 1))
     sio.emit('message', "...image has been saved! Processing image...", room = sid)
 
-def process_image(sid, base64image):
+def send_image(sid, base64image):
     # takes in a base64image then returns it back to the front end client
     sio.emit('image_processed', base64image, room = sid)
 

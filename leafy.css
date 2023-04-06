@@ -10,6 +10,7 @@ body {
   .image-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
     grid-gap: 10px;
     max-width: 75%;
     margin: 10px auto 0; /* adds 10px top padding */
@@ -29,8 +30,24 @@ body {
   
   .leaf-grid img {
     width: 100%;
+    min-height: 150px; /* You can adjust this value according to your preference */
+  }
+   
+  
+  .leaf-grid div {
+    position: relative;
+    display: grid;
   }
   
+  
+  .damage {
+    align-self: end;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 2px 5px;
+  }
+  
+  
+
 #image-upload {
   display: block;
   margin: 0 auto;
@@ -149,4 +166,9 @@ button:hover {
   100% {
       transform: translateX(-2px) rotate(-6deg);
   }
+}
+
+.damage {
+  /* align self to the bottom of the cell */
+  align-self: end;
 }
