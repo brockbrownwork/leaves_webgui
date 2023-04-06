@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Simple Canvas</title>
     <style>
+      /* Make sure that the canvases layer nicely */
       #canvas, #bgCanvas {
         position: absolute;
         top: 0;
@@ -20,36 +21,24 @@
         top: 0;
         left: 0;
       }
-      body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-        background-color: #f0f0f0;
-      }
       #bgCanvas {
         z-index: -1;
-      }
-      #pen, #eraser {
-        position: absolute;
-        top: 10px;
-        left: 320px;
-        z-index: 1;
       }
     </style>
   </head>
   <body>
+    /* create the pen button, eraser button, and the canvas */
     <button id="pen">Pen</button>
     <button id="eraser">Eraser</button>
     <div class = 'canvas-container'>
       <canvas id="bgCanvas" width="300" height="300"></canvas>
-      <canvas id="canvas" width="300" height="300"></canvas>
+      <canvas id="redCanvas" width="300" height="300"></canvas>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script>
-      var canvas = document.getElementById("canvas");
-      var ctx = canvas.getContext("2d");
+      var redCanvas = document.getElementById("redCanvas");
+      var activeCanvas = "redCanvas";
+      var ctx = document.getElementById(activeCanvas).getContext("2d");
 
       // Get background canvas and context
       var bgCanvas = document.getElementById("bgCanvas");
@@ -66,7 +55,7 @@
       var lastY;
       var mouseX;
       var mouseY;
-      var canvasOffset = $("#canvas").offset();
+      var canvasOffset = $("#" + activeCanvas).offset();
       var offsetX = canvasOffset.left;
       var offsetY = canvasOffset.top;
       var isMouseDown = false;
@@ -113,10 +102,10 @@
         }
       }
 
-      $("#canvas").mousedown(function(e) { handleMouseDown(e); });
-      $("#canvas").mousemove(function(e) { handleMouseMove(e); });
-      $("#canvas").mouseup(function(e) { handleMouseUp(e); });
-      $("#canvas").mouseout(function(e) { handleMouseOut(e); });
+      $(window).mousedown(function(e) { handleMouseDown(e); });
+      $(window).mousemove(function(e) { handleMouseMove(e); });
+      $(window).mouseup(function(e) { handleMouseUp(e); });
+      $(window).mouseout(function(e) { handleMouseOut(e); });
 
       $("#pen").click(function() { mode = "pen"; });
       $("#eraser").click(function() { mode = "eraser"; });
